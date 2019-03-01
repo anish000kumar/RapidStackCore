@@ -1,5 +1,5 @@
 const errors = require('./errors');
-const trycatch = require('@helpers/trycatch');
+const trycatch = require('./../../helpers/trycatch');
 const authService = require('./service');
 
 function authController({ model: User, fields, options }) {

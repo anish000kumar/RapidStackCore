@@ -1,10 +1,10 @@
 const mongoose = require('mongoose');
-const log = require('@helpers/log');
+const log = require('./../helpers/log');
 
 function mongoProvider({
   connectionString,
   onError = () => {},
-  onSucess = () => {},
+  onSuccess = () => {},
 }) {
   return new Promise((resolve, reject) => {
     try {

@@ -1,6 +1,6 @@
 const errors = require('./errors');
 const jwt = require('jsonwebtoken');
-const log = require('@helpers/log');
+const log = require('./../../helpers/log');
 
 module.exports = function(User) {
   return async function authMiddleware(req, res, next) {

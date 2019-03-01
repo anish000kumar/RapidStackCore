@@ -1,4 +1,4 @@
-const log = require('@helpers/log');
+const log = require('./../../helpers/log');
 const nodeMailer = require('nodemailer');
 const mg = require('nodemailer-mailgun-transport');
 
@@ -8,11 +8,7 @@ const mg = require('nodemailer-mailgun-transport');
  - mailable() 
 */
 function mailgunDriver({ api_key, domain, config }) {
-  const {
-    orgName = 'Organisation',
-    from,
-    templates_path = './templates',
-  } = config;
+  const { orgName = 'Organisation', from, template_path = 'mails' } = config;
 
   //errors
   if (!api_key)
@@ -32,14 +28,16 @@ function mailgunDriver({ api_key, domain, config }) {
     return nodeMailer.createTransport(mg(auth));
   }
 
-  function onError(err, info) {
-    if (err) {
-      log.error(`Error: ${JSON.stringify(err)}`);
-      reject(err);
-    } else {
-      log.success(`Response: ${JSON.stringify(info)}`);
-      resolve(true);
-    }
+  function onDone(resolve, reject) {
+    return function(err, info) {
+      if (err) {
+        log.error(`Error: ${JSON.stringify(err)}`);
+        reject(err);
+      } else {
+        log.success(`Response: ${JSON.stringify(info)}`);
+        resolve(true);
+      }
+    };
   }
 
   function sendMail(mailData) {
@@ -58,9 +56,11 @@ function mailgunDriver({ api_key, domain, config }) {
           to,
           from: config.from,
           subject,
-          html: require(`${templates_path}/${template}.mail`)(data),
+          html: require(`${
+            global.__basedir
+          }/${template_path}/${template}.mail`)(data),
         },
-        onError
+        onDone(resolve, reject)
       );
     });
   }
@@ -90,4 +90,4 @@ function mailgunDriver({ api_key, domain, config }) {
   };
 }
 
-module.exports = { sendMail, mailable };
+module.exports = mailgunDriver;

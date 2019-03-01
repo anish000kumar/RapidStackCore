@@ -1,17 +1,17 @@
 const crypto = require('crypto');
 const jwt = require('jsonwebtoken');
-const config = require('@config');
+const JWT_EXPIRY = 7 * 24 * 60 * 60;
+
 const { hash: hashPassword, compare } = require('bcryptjs');
 
 function AuthService(User, fields, options) {
-  const {
-    password = 'password',
-    hash = 'hash',
-    username = ['email'],
-    email = 'email',
-  } = fields;
+  const { password = 'password', hash = 'hash', username = ['email'] } = fields;
 
-  const { sendResetMail } = options;
+  const {
+    sendResetMail,
+    jwtExpiry = JWT_EXPIRY,
+    jwtSecret = '7SKJGJSG@38764JH29809832&#',
+  } = options;
 
   async function findByUsername(inputUserName) {
     const queries = [];
@@ -52,8 +52,8 @@ function AuthService(User, fields, options) {
   }
 
   function getToken(user) {
-    return jwt.sign({ id: user.id }, config.jwtSecret, {
-      expiresIn: config.jwtExpiry,
+    return jwt.sign({ id: user.id }, jwtSecret, {
+      expiresIn: jwtExpiry,
     });
   }
 
@@ -69,8 +69,8 @@ function AuthService(User, fields, options) {
   }
 
   async function setResetPasswordHash(user, value) {
-    const hash = value || crypto.randomBytes(64).toString('hex');
-    user[hash] = hash;
+    const hashVal = value || crypto.randomBytes(64).toString('hex');
+    user[hash] = hashVal;
     await user.save();
     return user;
   }

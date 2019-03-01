@@ -1,12 +1,12 @@
 {
-  "name": "rapidstackcore",
-  "version": "1.0.0",
+  "name": "rapidstack",
+  "version": "0.0.1",
   "description": "",
   "main": "index.js",
   "scripts": {
     "postinstall": "link-module-alias",
     "preinstall": "command -v link-module-alias && link-module-alias clean || true",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest"
   },
   "author": "",
   "dependencies": {
@@ -38,17 +38,9 @@
     "babel-runtime": "^6.26.0",
     "express-print-routes": "^1.0.0",
     "jest": "^24.1.0",
-    "link-module-alias": "^1.1.6",
     "nodemon": "^1.18.9",
     "webpack": "^4.29.0",
     "webpack-cli": "^3.2.1"
-  },
-  "_moduleAliases": {
-    "@root": ".",
-    "@helpers": "helpers",
-    "@abilities": "abilities",
-    "@auth": "authStrategies",
-    "@services": "services"
   },
   "license": "ISC"
 }
