@@ -1,4 +1,4 @@
 module.exports = {
-  mail: require('./mailService'),
-  file: require('./fileService'),
+  mail: require('./mailDriver'),
+  file: require('./fileDriver'),
 };

@@ -1,7 +1,7 @@
 module.exports = {
   auth: require('./auth'),
   database: require('./database'),
-  services: require('./services'),
+  serviceDrivers: require('./drivers'),
 
   // helpers
   log: require('./helpers/log'),
