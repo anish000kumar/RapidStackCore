@@ -1,11 +1,9 @@
 {
   "name": "rapidstack",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "postinstall": "link-module-alias",
-    "preinstall": "command -v link-module-alias && link-module-alias clean || true",
     "test": "jest"
   },
   "author": "",
