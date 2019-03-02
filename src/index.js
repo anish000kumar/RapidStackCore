@@ -1,7 +1,7 @@
 module.exports = {
   auth: require('./auth'),
-  database: require('./database'),
-  serviceDrivers: require('./drivers'),
+  dbDrivers: require('./dbDrivers'),
+  mailDrivers: require('./mailDrivers'),
   bootstrap: require('./bootstrap'),
 
   // helpers
