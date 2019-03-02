@@ -1,7 +1,7 @@
 require('dotenv').config();
 const mailDriver = require('../index');
 const { model, Schema } = require('mongoose');
-require('./../../../../src/bootstrap')();
+require('./../../../src/bootstrap')();
 
 describe('Mail Service', () => {
   const mailService = mailDriver.mailgun({

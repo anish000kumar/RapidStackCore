@@ -1,4 +1,4 @@
-const log = require('./../../helpers/log');
+const log = require('./../helpers/log');
 const nodeMailer = require('nodemailer');
 const mg = require('nodemailer-mailgun-transport');
 
